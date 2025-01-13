@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "useless-no-more",
+	"version": "${version}",
+	"name": "Useless No More!",
+	"description": "Useless No More makes every forgotten item, odd block, and out-of-place mob in Minecraft truly worthwhile! Expand your crafting recipes, unlock fresh abilities, and discover new uses for everything that used to gather dust.",
+	"authors": [
+		"xerneas02"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/useless-no-more/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.xerneas.uslessnomore.UselessNoMore"
+		],
+		"fabric-datagen": [
+			"net.xerneas.uslessnomore.UselessNoMoreDataGenerator"
+		],
+		"client": [
+			"net.xerneas.uslessnomore.UselessNoMoreClient"
+		]
+	},
+	"mixins": [
+		"useless-no-more.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
