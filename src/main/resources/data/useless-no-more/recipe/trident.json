@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "useless-no-more:elder_guardian_shard"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "C": {
+      "item": "minecraft:prismarine_crystals"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "CPC",
+    " P "
+  ],
+  "result": {
+    "id": "minecraft:trident",
+    "count": 1
+  }
+}

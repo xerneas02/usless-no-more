@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "useless-no-more:item/elder_guardian_shard"
+  }
+}
