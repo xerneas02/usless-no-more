@@ -10,7 +10,9 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
+import net.xerneas.uslessnomore.entities.ModEntities;
 import net.xerneas.uslessnomore.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ public class UselessNoMore implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();
+		ModEntities.registerModEntities();
 
 		// Add item to entities loot tables
 		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {

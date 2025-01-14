@@ -13,6 +13,7 @@ import net.xerneas.uslessnomore.UselessNoMore;
 public class ModItems {
     public static final Item ELDER_GUARDIAN_SHARD = registerItem("elder_guardian_shard", new Item(new Item.Settings().rarity(Rarity.RARE)));
     public static final Item GUARDIAN_SHARD = registerItem("guardian_shard", new Item(new Item.Settings()));
+    public static final Item GUARDIAN_ARROW = registerItem("guardian_arrow", new GuardianArrowItem(new Item.Settings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(UselessNoMore.MOD_ID, name), item);
@@ -23,6 +24,10 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
             entries.add(ELDER_GUARDIAN_SHARD);
             entries.add(GUARDIAN_SHARD);
+        });
+
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
+                entries.add(GUARDIAN_ARROW);
         });
     }
 }
