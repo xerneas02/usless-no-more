@@ -15,7 +15,6 @@ import net.xerneas.uslessnomore.item.ModItems;
 import org.jetbrains.annotations.Nullable;
 
 public class GuardianArrowEntity extends PersistentProjectileEntity {
-    private int duration = 200;
 
     public GuardianArrowEntity(EntityType<? extends GuardianArrowEntity> entityType, World world) {
         super(entityType, world);
@@ -30,32 +29,8 @@ public class GuardianArrowEntity extends PersistentProjectileEntity {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (this.getWorld().isClient && !this.inGround) {
-            this.getWorld().addParticle(ParticleTypes.INSTANT_EFFECT, this.getX(), this.getY(), this.getZ(), 0.0, 0.0, 0.0);
-        }
-    }
-
-    @Override
-    protected void onHit(LivingEntity target) {
-        super.onHit(target);
-        StatusEffectInstance statusEffectInstance = new StatusEffectInstance(StatusEffects.WATER_BREATHING, this.duration, 0);
-        target.addStatusEffect(statusEffectInstance, this.getEffectCause());
-    }
-
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        if (nbt.contains("Duration")) {
-            this.duration = nbt.getInt("Duration");
-        }
-    }
-
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        nbt.putInt("Duration", this.duration);
+    protected float getDragInWater() {
+        return 1.0F;
     }
 
     @Override
