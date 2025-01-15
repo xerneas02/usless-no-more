@@ -10,11 +10,11 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.registry.RegistryKey;
 import net.xerneas.uslessnomore.block.ModBlocks;
 import net.xerneas.uslessnomore.entities.ModEntities;
 import net.xerneas.uslessnomore.item.ModItems;
+import net.xerneas.uslessnomore.potion.ModPotions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +30,7 @@ public class UselessNoMore implements ModInitializer {
 		ModItems.registerModItems();
 		ModEntities.registerModEntities();
 		ModBlocks.registerModBlocks();
+		//ModPotions.registerModPotions();
 
 		// Add item to entities loot tables
 		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {

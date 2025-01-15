@@ -3,7 +3,8 @@
 	"package": "net.xerneas.uslessnomore.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+		"MyBrewingRecipeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
