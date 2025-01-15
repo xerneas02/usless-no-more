@@ -1,0 +1,11 @@
+{
+  "item.useless-no-more.elder_guardian_shard" : "Fragment de Grand Gardien",
+  "item.useless-no-more.guardian_shard" : "Fragment de Gardien",
+  "item.useless-no-more.guardian_arrow" : "Flèche de Gardien",
+  "block.useless-no-more.lit_torchflower" : "Torche-fleur",
+  "item.useless-no-more.pitcher_acid.effect.empty" : "Acide de Planturne",
+  "advancements.husbandry.rust_in_rush.description": "Appliquez de l'acide de Planturne sur un bloc de cuivre !",
+  "advancements.husbandry.rust_in_rush.title": "Oxydation Express",
+  "advancements.husbandry.this_isnt_lemonade.description": "Buvez de l'acide de Planturne...",
+  "advancements.husbandry.this_isnt_lemonade.title": "Ce n'est pas de la limonade..."
+}
