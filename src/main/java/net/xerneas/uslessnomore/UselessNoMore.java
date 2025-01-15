@@ -52,15 +52,5 @@ public class UselessNoMore implements ModInitializer {
 			}
 		});
 
-		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-			if (source.isBuiltin() && TORCH_FLOWER_CROP_TABLE_ID.equals(key)) {
-				LootPool.Builder poolBuilder = LootPool.builder()
-						.rolls(ConstantLootNumberProvider.create(1))
-						.with(ItemEntry.builder(ModItems.LIT_TORCHFLOWER));
-
-				tableBuilder.pool(poolBuilder);
-			}
-		});
-
 	}
 }
