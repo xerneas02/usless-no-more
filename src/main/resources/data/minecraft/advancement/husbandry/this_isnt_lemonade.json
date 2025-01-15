@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:husbandry/rust_in_rush",
+  "criteria": {
+    "pitcher_acid": {
+      "conditions": {
+        "item": {
+          "items": "useless-no-more:pitcher_acid"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.this_isnt_lemonade.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:glass_bottle"
+    },
+    "title": {
+      "translate": "advancements.husbandry.this_isnt_lemonade.title"
+    }
+  },
+  "requirements": [
+    [
+      "pitcher_acid"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

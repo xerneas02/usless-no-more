@@ -15,9 +15,7 @@ public class ModItems {
     public static final Item GUARDIAN_SHARD = registerItem("guardian_shard", new Item(new Item.Settings()));
     public static final Item GUARDIAN_ARROW = registerItem("guardian_arrow", new GuardianArrowItem(new Item.Settings()));
     public static final Item LIT_TORCHFLOWER = registerItem("lit_torchflower", new BlockItem(ModBlocks.LIT_TORCHFLOWER_BLOCK, new Item.Settings()));
-    public static final Item PITCHER_ACID = registerItem("pitcher_acid", new PitcherAcidItem(new Item.Settings()));
-    public static final Item SPLASH_PITCHER_ACID = registerItem("splash_pitcher_acid", new ThrowablePotionItem(new Item.Settings()));
-    public static final Item LINGERING_PITCHER_ACID = registerItem("lingering_pitcher_acid", new LingeringPotionItem(new Item.Settings()));
+    public static final Item PITCHER_ACID = registerItem("pitcher_acid", new PitcherAcidItem(new Item.Settings().maxCount(16)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(UselessNoMore.MOD_ID, name), item);
@@ -41,8 +39,6 @@ public class ModItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
             entries.add(PITCHER_ACID);
-            entries.add(SPLASH_PITCHER_ACID);
-            entries.add(LINGERING_PITCHER_ACID);
         });
 
         DispenserBlock.registerProjectileBehavior(ModItems.GUARDIAN_ARROW);

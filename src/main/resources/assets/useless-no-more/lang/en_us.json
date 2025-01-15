@@ -3,7 +3,9 @@
   "item.useless-no-more.guardian_shard" : "Guardian Shard",
   "item.useless-no-more.guardian_arrow" : "Guardian Arrow",
   "block.useless-no-more.lit_torchflower" : "Torchflower",
-  "item.useless-no-more.pitcher_acid" : "Pitcher Acid",
-  "item.useless-no-more.splash_pitcher_acid" : "Splash Pitcher Acid",
-  "item.useless-no-more.lingering_pitcher_acid" : "Lingering Pitcher Acid"
+  "item.useless-no-more.pitcher_acid.effect.empty" : "Pitcher Acid",
+  "advancements.husbandry.rust_in_rush.description": "Apply Pitcher Acid to a Copper block!",
+  "advancements.husbandry.rust_in_rush.title": "Rust In Rush",
+  "advancements.husbandry.this_isnt_lemonade.description": "Drink Pitcher Acid...",
+  "advancements.husbandry.this_isnt_lemonade.title": "This Isn’t Lemonade…"
 }

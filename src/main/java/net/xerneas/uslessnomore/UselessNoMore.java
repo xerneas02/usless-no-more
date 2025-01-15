@@ -15,6 +15,7 @@ import net.xerneas.uslessnomore.block.ModBlocks;
 import net.xerneas.uslessnomore.entities.ModEntities;
 import net.xerneas.uslessnomore.item.ModItems;
 import net.xerneas.uslessnomore.potion.ModPotions;
+import net.xerneas.uslessnomore.recipe.ModRecipes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +31,7 @@ public class UselessNoMore implements ModInitializer {
 		ModItems.registerModItems();
 		ModEntities.registerModEntities();
 		ModBlocks.registerModBlocks();
-		//ModPotions.registerModPotions();
+		ModRecipes.registerMosRecipes();
 
 		// Add item to entities loot tables
 		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {

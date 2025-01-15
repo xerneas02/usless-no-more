@@ -2,14 +2,16 @@ package net.xerneas.uslessnomore.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.Property;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,25 +19,75 @@ import net.minecraft.world.World;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PitcherAcidItem extends Item {
+public class PitcherAcidItem extends PotionItem {
 
-    private static final Map<Block, Block> OXIDATION_MAP = new HashMap<>();
+    public static final Map<Block, Block> OXIDATION_MAP = new HashMap<>();
 
     static {
-
         // Plain copper blocks
-        OXIDATION_MAP.put(net.minecraft.block.Blocks.COPPER_BLOCK, net.minecraft.block.Blocks.EXPOSED_COPPER);
-        OXIDATION_MAP.put(net.minecraft.block.Blocks.EXPOSED_COPPER, net.minecraft.block.Blocks.WEATHERED_COPPER);
-        OXIDATION_MAP.put(net.minecraft.block.Blocks.WEATHERED_COPPER, net.minecraft.block.Blocks.OXIDIZED_COPPER);
+        OXIDATION_MAP.put(Blocks.COPPER_BLOCK, Blocks.EXPOSED_COPPER);
+        OXIDATION_MAP.put(Blocks.EXPOSED_COPPER, Blocks.WEATHERED_COPPER);
+        OXIDATION_MAP.put(Blocks.WEATHERED_COPPER, Blocks.OXIDIZED_COPPER);
 
         // Cut copper variants
-        OXIDATION_MAP.put(net.minecraft.block.Blocks.CUT_COPPER, net.minecraft.block.Blocks.EXPOSED_CUT_COPPER);
-        OXIDATION_MAP.put(net.minecraft.block.Blocks.EXPOSED_CUT_COPPER, net.minecraft.block.Blocks.WEATHERED_CUT_COPPER);
-        OXIDATION_MAP.put(net.minecraft.block.Blocks.WEATHERED_CUT_COPPER, net.minecraft.block.Blocks.OXIDIZED_CUT_COPPER);
+        OXIDATION_MAP.put(Blocks.CUT_COPPER, Blocks.EXPOSED_CUT_COPPER);
+        OXIDATION_MAP.put(Blocks.EXPOSED_CUT_COPPER, Blocks.WEATHERED_CUT_COPPER);
+        OXIDATION_MAP.put(Blocks.WEATHERED_CUT_COPPER, Blocks.OXIDIZED_CUT_COPPER);
+
+        // Cut copper stairs variants
+        OXIDATION_MAP.put(Blocks.CUT_COPPER_STAIRS, Blocks.EXPOSED_CUT_COPPER_STAIRS);
+        OXIDATION_MAP.put(Blocks.EXPOSED_CUT_COPPER_STAIRS, Blocks.WEATHERED_CUT_COPPER_STAIRS);
+        OXIDATION_MAP.put(Blocks.WEATHERED_CUT_COPPER_STAIRS, Blocks.OXIDIZED_CUT_COPPER_STAIRS);
+
+        // Cut copper slab variants
+        OXIDATION_MAP.put(Blocks.CUT_COPPER_SLAB, Blocks.EXPOSED_CUT_COPPER_SLAB);
+        OXIDATION_MAP.put(Blocks.EXPOSED_CUT_COPPER_SLAB, Blocks.WEATHERED_CUT_COPPER_SLAB);
+        OXIDATION_MAP.put(Blocks.WEATHERED_CUT_COPPER_SLAB, Blocks.OXIDIZED_CUT_COPPER_SLAB);
+
+        // Modded: Chiseled copper variants
+        OXIDATION_MAP.put(Blocks.CHISELED_COPPER, Blocks.EXPOSED_CHISELED_COPPER);
+        OXIDATION_MAP.put(Blocks.EXPOSED_CHISELED_COPPER, Blocks.WEATHERED_CHISELED_COPPER);
+        OXIDATION_MAP.put(Blocks.WEATHERED_CHISELED_COPPER, Blocks.OXIDIZED_CHISELED_COPPER);
+
+        // Modded: Copper grate variants
+        OXIDATION_MAP.put(Blocks.COPPER_GRATE, Blocks.EXPOSED_COPPER_GRATE);
+        OXIDATION_MAP.put(Blocks.EXPOSED_COPPER_GRATE, Blocks.WEATHERED_COPPER_GRATE);
+        OXIDATION_MAP.put(Blocks.WEATHERED_COPPER_GRATE, Blocks.OXIDIZED_COPPER_GRATE);
+
+        // Modded: Copper door variants
+        OXIDATION_MAP.put(Blocks.COPPER_DOOR, Blocks.EXPOSED_COPPER_DOOR);
+        OXIDATION_MAP.put(Blocks.EXPOSED_COPPER_DOOR, Blocks.WEATHERED_COPPER_DOOR);
+        OXIDATION_MAP.put(Blocks.WEATHERED_COPPER_DOOR, Blocks.OXIDIZED_COPPER_DOOR);
+
+        // Modded: Copper trapdoor variants
+        OXIDATION_MAP.put(Blocks.COPPER_TRAPDOOR, Blocks.EXPOSED_COPPER_TRAPDOOR);
+        OXIDATION_MAP.put(Blocks.EXPOSED_COPPER_TRAPDOOR, Blocks.WEATHERED_COPPER_TRAPDOOR);
+        OXIDATION_MAP.put(Blocks.WEATHERED_COPPER_TRAPDOOR, Blocks.OXIDIZED_COPPER_TRAPDOOR);
+
+        // Modded: Copper bulb variants
+        OXIDATION_MAP.put(Blocks.COPPER_BULB, Blocks.EXPOSED_COPPER_BULB);
+        OXIDATION_MAP.put(Blocks.EXPOSED_COPPER_BULB, Blocks.WEATHERED_COPPER_BULB);
+        OXIDATION_MAP.put(Blocks.WEATHERED_COPPER_BULB, Blocks.OXIDIZED_COPPER_BULB);
     }
+
 
     public PitcherAcidItem(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        ItemStack result = super.finishUsing(stack, world, user);
+
+        if (!world.isClient) {
+            user.addStatusEffect(new StatusEffectInstance(
+                    StatusEffects.WITHER,
+                    200,
+                    0
+            ));
+        }
+
+        return result;
     }
 
     @Override
@@ -44,19 +96,25 @@ public class PitcherAcidItem extends Item {
         BlockPos pos = context.getBlockPos();
         BlockState state = world.getBlockState(pos);
 
-        // Vérifier si c'est un bloc Cuivre dans la map d'oxydation
         if (OXIDATION_MAP.containsKey(state.getBlock())) {
             if (!world.isClient) {
-                // Obtenir la référence au joueur
                 PlayerEntity player = context.getPlayer();
-                // Obtenir l'ItemStack de Pitcher Acid
                 ItemStack stack = context.getStack();
 
-                // Changer le bloc de cuivre au stade suivant
+                // Get the next block in the oxidation chain
                 Block nextBlock = OXIDATION_MAP.get(state.getBlock());
-                world.setBlockState(pos, nextBlock.getDefaultState(), 3);
 
-                // Jouer un petit son si tu veux
+                // Preserve the block's properties when oxidizing
+                BlockState nextState = nextBlock.getDefaultState();
+                for (Property<?> property : state.getProperties()) {
+                    nextState = applyProperty(nextState, property, state);
+                }
+
+
+                // Set the block with preserved state
+                world.setBlockState(pos, nextState, 3);
+
+                // Play sound effect
                 world.playSound(
                         null,
                         pos,
@@ -66,16 +124,14 @@ public class PitcherAcidItem extends Item {
                         1.0F
                 );
 
-                // Consommer l’acide
+                // Consume the Pitcher Acid
                 stack.decrement(1);
 
-                // Rendre une bouteille vide
+                // Give an empty bottle to the player
                 if (player != null && !player.isCreative()) {
                     ItemStack emptyBottle = new ItemStack(Items.GLASS_BOTTLE);
 
-                    // Essayer de l'ajouter dans l'inventaire du joueur
                     if (!player.getInventory().insertStack(emptyBottle)) {
-                        // Si l'inventaire est plein, la drop au sol
                         player.dropItem(emptyBottle, false);
                     }
                 }
@@ -83,7 +139,12 @@ public class PitcherAcidItem extends Item {
             return ActionResult.success(world.isClient);
         }
 
-        // Sinon, comportement par défaut
         return super.useOnBlock(context);
     }
+
+    private static <T extends Comparable<T>> BlockState applyProperty(BlockState state, Property<T> property, BlockState originalState) {
+        return state.with(property, originalState.get(property));
+    }
+
+
 }
