@@ -4,14 +4,15 @@ import net.fabricmc.api.ModInitializer;
 
 
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.util.Identifier;
+import net.xerneas.uslessnomore.block.ModBlocks;
 import net.xerneas.uslessnomore.entities.ModEntities;
 import net.xerneas.uslessnomore.item.ModItems;
 import org.slf4j.Logger;
@@ -20,12 +21,15 @@ import org.slf4j.LoggerFactory;
 public class UselessNoMore implements ModInitializer {
 	public static final String MOD_ID = "useless-no-more";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	private static final RegistryKey ELDER_GUARDIAN_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
-	private static final RegistryKey GUARDIAN_TABLE_ID = EntityType.GUARDIAN.getLootTableId();
+	private static final RegistryKey<LootTable> ELDER_GUARDIAN_TABLE_ID = EntityType.ELDER_GUARDIAN.getLootTableId();
+	private static final RegistryKey<LootTable> GUARDIAN_TABLE_ID = EntityType.GUARDIAN.getLootTableId();
+	private static final RegistryKey<LootTable> TORCH_FLOWER_CROP_TABLE_ID = Blocks.TORCHFLOWER_CROP.getLootTableKey();
+
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();
 		ModEntities.registerModEntities();
+		ModBlocks.registerModBlocks();
 
 		// Add item to entities loot tables
 		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
@@ -47,5 +51,16 @@ public class UselessNoMore implements ModInitializer {
 				tableBuilder.pool(poolBuilder);
 			}
 		});
+
+		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+			if (source.isBuiltin() && TORCH_FLOWER_CROP_TABLE_ID.equals(key)) {
+				LootPool.Builder poolBuilder = LootPool.builder()
+						.rolls(ConstantLootNumberProvider.create(1))
+						.with(ItemEntry.builder(ModItems.LIT_TORCHFLOWER));
+
+				tableBuilder.pool(poolBuilder);
+			}
+		});
+
 	}
 }
