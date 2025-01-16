@@ -18,9 +18,6 @@
 		"main": [
 			"net.xerneas.uslessnomore.UselessNoMore"
 		],
-		"fabric-datagen": [
-			"net.xerneas.uslessnomore.UselessNoMoreDataGenerator"
-		],
 		"client": [
 			"net.xerneas.uslessnomore.UselessNoMoreClient"
 		]

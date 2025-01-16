@@ -3,7 +3,6 @@
 	"package": "net.xerneas.uslessnomore.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin",
 		"FurnaceMinecartEntityMixin"
 	],
 	"injectors": {
