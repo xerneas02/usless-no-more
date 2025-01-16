@@ -11,8 +11,8 @@ import net.xerneas.uslessnomore.UselessNoMore;
 import net.xerneas.uslessnomore.block.ModBlocks;
 
 public class ModItems {
-    public static final Item ELDER_GUARDIAN_SHARD = registerItem("elder_guardian_shard", new Item(new Item.Settings().rarity(Rarity.RARE)));
-    public static final Item GUARDIAN_SHARD = registerItem("guardian_shard", new Item(new Item.Settings()));
+    public static final Item ELDER_GUARDIAN_SPIKE = registerItem("elder_guardian_spike", new Item(new Item.Settings().rarity(Rarity.RARE)));
+    public static final Item GUARDIAN_SPIKE = registerItem("guardian_spike", new Item(new Item.Settings()));
     public static final Item GUARDIAN_ARROW = registerItem("guardian_arrow", new GuardianArrowItem(new Item.Settings()));
     public static final Item LIT_TORCHFLOWER = registerItem("lit_torchflower", new BlockItem(ModBlocks.LIT_TORCHFLOWER_BLOCK, new Item.Settings()));
     public static final Item PITCHER_ACID = registerItem("pitcher_acid", new PitcherAcidItem(new Item.Settings().maxCount(16)));
@@ -25,8 +25,8 @@ public class ModItems {
         UselessNoMore.LOGGER.info("Registering Mod Items for " + UselessNoMore.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
-            entries.add(ELDER_GUARDIAN_SHARD);
-            entries.add(GUARDIAN_SHARD);
+            entries.add(ELDER_GUARDIAN_SPIKE);
+            entries.add(GUARDIAN_SPIKE);
         });
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {

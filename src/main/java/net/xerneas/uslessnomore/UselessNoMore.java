@@ -14,7 +14,6 @@ import net.minecraft.registry.RegistryKey;
 import net.xerneas.uslessnomore.block.ModBlocks;
 import net.xerneas.uslessnomore.entities.ModEntities;
 import net.xerneas.uslessnomore.item.ModItems;
-import net.xerneas.uslessnomore.potion.ModPotions;
 import net.xerneas.uslessnomore.recipe.ModRecipes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,7 @@ public class UselessNoMore implements ModInitializer {
 			if (source.isBuiltin() && ELDER_GUARDIAN_TABLE_ID.equals(key)) {
 				LootPool.Builder poolBuilder = LootPool.builder()
 						.rolls(UniformLootNumberProvider.create(0, 2))
-						.with(ItemEntry.builder(ModItems.ELDER_GUARDIAN_SHARD));
+						.with(ItemEntry.builder(ModItems.ELDER_GUARDIAN_SPIKE));
 
 				tableBuilder.pool(poolBuilder);
 			}
@@ -48,7 +47,7 @@ public class UselessNoMore implements ModInitializer {
 			if (source.isBuiltin() && GUARDIAN_TABLE_ID.equals(key)) {
 				LootPool.Builder poolBuilder = LootPool.builder()
 						.rolls(UniformLootNumberProvider.create(0, 4))
-						.with(ItemEntry.builder(ModItems.GUARDIAN_SHARD));
+						.with(ItemEntry.builder(ModItems.GUARDIAN_SPIKE));
 
 				tableBuilder.pool(poolBuilder);
 			}
