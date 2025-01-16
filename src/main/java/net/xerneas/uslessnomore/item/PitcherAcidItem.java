@@ -1,5 +1,6 @@
 package net.xerneas.uslessnomore.item;
 
+import com.google.common.collect.BiMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -18,6 +19,7 @@ import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class PitcherAcidItem extends PotionItem {
 
@@ -73,6 +75,11 @@ public class PitcherAcidItem extends PotionItem {
 
     public PitcherAcidItem(Settings settings) {
         super(settings);
+    }
+
+
+    public static Optional<BlockState> getOxidizeState(BlockState state) {
+        return Optional.ofNullable((Block)(OXIDATION_MAP.get(state.getBlock()))).map(block -> block.getStateWithProperties(state));
     }
 
     @Override
