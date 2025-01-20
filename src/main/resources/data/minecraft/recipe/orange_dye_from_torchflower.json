@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "useless-no-more:torchflowers"
+      "item": "minecraft:torchflower"
     }
   ],
   "result": {
-    "count": 1,
-    "id": "minecraft:orange_dye"
+    "count": 16,
+    "id": "useless-no-more:glow_pollen"
   }
 }
